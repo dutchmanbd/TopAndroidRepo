@@ -21,9 +21,13 @@ android {
             abiFilters.addAll(arrayOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
         }
         resourceConfigurations.addAll(arrayOf("en"))
-//
-//        val baseUrl = findProperty("BASE_URL") as String
-//        buildConfigField("String", "BASE_URL", baseUrl)
+
+        val baseUrl = findProperty("BASE_URL") as String
+        val token = findProperty("TOKEN") as String
+
+        buildConfigField("String", "BASE_URL", baseUrl)
+        buildConfigField("String", "TOKEN", token)
+
 
 
     }
@@ -51,8 +55,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-//            val baseUrl = findProperty("BASE_URL") as String
-//            buildConfigField("String", "BASE_URL", baseUrl)
+
             applicationVariants.all {
                 outputs.all {
                     if (name.contains("debug"))
@@ -78,6 +81,9 @@ android {
 setupCommonDependencies()
 
 dependencies {
+
+    implementation(project(mapOf("path" to ":extensions")))
+    implementation(project(mapOf("path" to ":utilities")))
 
     useNavigation()
     useRoom()
