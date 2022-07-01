@@ -23,12 +23,8 @@ android {
         resourceConfigurations.addAll(arrayOf("en"))
 
         val baseUrl = findProperty("BASE_URL") as String
-        val token = findProperty("TOKEN") as String
-
+        
         buildConfigField("String", "BASE_URL", baseUrl)
-        buildConfigField("String", "TOKEN", token)
-
-
 
     }
 

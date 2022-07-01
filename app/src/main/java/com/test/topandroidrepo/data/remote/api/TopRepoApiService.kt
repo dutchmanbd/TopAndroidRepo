@@ -12,5 +12,7 @@ interface TopRepoApiService {
         @QueryMap queryMap: Map<String, String>
     ): Response<SearchRepositoryResponse>
 
+    @GET("users/owncloud")
+
 
 }
