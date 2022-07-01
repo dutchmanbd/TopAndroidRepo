@@ -30,7 +30,7 @@ abstract class SafeApiRequest {
             } else {
                 message
             }
-            ApiResponse.create( formattedMessage)
+            ApiResponse.create(formattedMessage)
         }
 
     }

@@ -8,11 +8,12 @@ import com.test.topandroidrepo.domain.db.converters.TopicTypeConverter
 import com.test.topandroidrepo.domain.db.dao.RepoDao
 import com.test.topandroidrepo.domain.db.dao.UserDao
 import com.test.topandroidrepo.domain.model.Repo
+import com.test.topandroidrepo.domain.model.User
 
 const val TOP_REPO_DATABASE = "top_repos.db"
 
 @Database(
-    entities = [Repo::class],
+    entities = [Repo::class, User::class],
     version = 1,
 //    autoMigrations = [
 //        AutoMigration(from = 1, to = 2)

@@ -16,7 +16,7 @@ interface RepoDao {
     suspend fun insertRepos(repos: List<Repo>)
 
     @Query("SELECT * FROM repos")
-    suspend fun getRepos(): List<Repo>
+    suspend fun getRepos(): List<Repo>?
 
 
 }

@@ -6,6 +6,12 @@ object DepUtils {
     const val shimmer = "com.facebook.shimmer:shimmer:_"
     const val dexter = "com.karumi:dexter:_"
     const val sdpAndroid = "com.intuit.sdp:sdp-android:_"
+    const val junit = "junit:junit:_"
+    const val hamcrest = "org.hamcrest:hamcrest-all:_"
+    const val robolectric = "org.robolectric:robolectric:_"
+    const val mockito = "org.mockito:mockito-core:_"
+    const val dexMakerMockito = "com.linkedin.dexmaker:dexmaker-mockito:_"
+    const val truth = "com.google.truth:truth:_"
 
 
 }

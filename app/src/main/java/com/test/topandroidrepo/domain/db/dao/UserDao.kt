@@ -14,6 +14,6 @@ interface UserDao {
     suspend fun insertUser(user: User)
 
     @Query("SELECT * FROM users WHERE username =:username")
-    suspend fun getUser(username: String): User
+    suspend fun getUser(username: String): User?
 
 }

@@ -9,13 +9,13 @@ object TopicTypeConverter {
     @TypeConverter
     @JvmStatic
     fun listStringToString(list: List<String>): String {
-        return Gson().toJson(list)
+        return if (list.isEmpty()) "" else Gson().toJson(list)
     }
 
     @JvmStatic
     @TypeConverter
     fun stringFromListString(value: String): List<String> {
-        return Gson().fromJson(value)
+        return if (value.isEmpty()) listOf() else Gson().fromJson(value)
     }
 
 }

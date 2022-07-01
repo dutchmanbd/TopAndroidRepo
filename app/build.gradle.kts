@@ -23,7 +23,7 @@ android {
         resourceConfigurations.addAll(arrayOf("en"))
 
         val baseUrl = findProperty("BASE_URL") as String
-        
+
         buildConfigField("String", "BASE_URL", baseUrl)
 
     }
@@ -62,6 +62,8 @@ android {
 
         }
     }
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

@@ -30,7 +30,9 @@ class TopRepositoryImpl(
         object : NetworkBoundResource<List<Repo>, SearchRepositoryResponse>() {
             override suspend fun saveCallResult(item: SearchRepositoryResponse) {
                 val repos = item.repos?.map { it.toRepo() } ?: emptyList()
-                repoDao.insertRepos(repos)
+                if (repos.isNotEmpty()) {
+                    repoDao.insertRepos(repos)
+                }
             }
 
             override fun shouldFetch(data: List<Repo>?): Boolean {
@@ -56,6 +58,7 @@ class TopRepositoryImpl(
         override fun shouldFetch(data: User?): Boolean {
             return data == null || rateLimit.shouldFetch(username)
         }
+
         override suspend fun loadFromDb() = userDao.getUser(username)
         override suspend fun createCall() = dataSource.getUser(username)
         override fun onFetchFailed() {

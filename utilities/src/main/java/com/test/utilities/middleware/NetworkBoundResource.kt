@@ -7,8 +7,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.test.utilities.Resource
 import com.test.utilities.responses.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
 
@@ -16,39 +14,34 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         private const val TAG = "NetworkBoundResource"
     }
 
-
     fun asLiveData(): LiveData<Resource<ResultType>> = liveData {
         emit(Resource.Loading())
         val data = loadFromDb()
-        emit(if (shouldFetch(data)) {
-            when (val response = createCall()) {
-                is ApiEmptyResponse -> {
-                    Resource.Failure(response.message, response.code)
-                }
-                is ApiErrorResponse -> {
-                    if (data != null) {
-                        Resource.Success(data)
-                    } else {
+        emit(
+            if (data != null && !shouldFetch(data))
+                Resource.Success(data)
+            else
+                when (val response = createCall()) {
+                    is ApiEmptyResponse -> {
                         Resource.Failure(response.message, response.code)
                     }
-                }
-                is ApiSuccessResponse -> {
-                    withContext(Dispatchers.IO) {
+                    is ApiErrorResponse -> {
+                        if (data != null) {
+                            Resource.Success(data)
+                        } else {
+                            Resource.Failure(response.message, response.code)
+                        }
+                    }
+                    is ApiSuccessResponse -> {
                         saveCallResult(processResponse(response))
-//                        delay(2000)
                         val newData = loadFromDb()
-                        if (newData != null) Resource.Success(newData)
-                        else Resource.Failure(DATA_NOT_FOUND, DATA_NOT_FOUND_CODE)
+                        if (newData != null)
+                            Resource.Success(newData)
+                        else
+                            Resource.Failure(DATA_NOT_FOUND, DATA_NOT_FOUND_CODE)
                     }
                 }
-            }
-        } else {
-            if (data != null) {
-                Resource.Success(data)
-            } else {
-                Resource.Failure(DATA_NOT_FOUND, DATA_NOT_FOUND_CODE)
-            }
-        })
+        )
     }
 
     protected abstract fun onFetchFailed()

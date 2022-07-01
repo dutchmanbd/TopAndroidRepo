@@ -29,15 +29,3 @@ fun BaseExtension.setJvmVersions() {
     val kotlinJvmOptions = (this as ExtensionAware).extensions.getByName("kotlinOptions") as KotlinJvmOptions
     kotlinJvmOptions.jvmTarget = "1.8"
 }
-
-fun BaseExtension.disableAbortOnErrorForLint() {
-    lintOptions {
-        isAbortOnError = false
-    }
-}
-
-fun BaseExtension.disableMissingTranslationLint() {
-    lintOptions {
-        disable("MissingTranslation")
-    }
-}
