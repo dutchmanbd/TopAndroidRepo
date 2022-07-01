@@ -1,15 +1,15 @@
-package com.test.topandroidrepo.domain.db.dao
+package com.test.topandroidrepo.domain.repository
 
-import com.test.topandroidrepo.domain.model.Owner
-import com.test.topandroidrepo.domain.model.Repo
+import com.test.topandroidrepo.data.model.OwnerDto
+import com.test.topandroidrepo.data.model.RepoDto
 
 object RepoList {
 
-    val repos = listOf(
-        Repo(
+    val repoDtos = listOf(
+        RepoDto(
             id = 82128465, nodeId = "MDEwOlJlcG9zaXRvcnk4MjEyODQ2NQ==",
             name = "Android", fullName = "open-android/Android",
-            owner = Owner(
+            owner = OwnerDto(
                 username = "open-android"
             ),
             description = "GitHub上最火的Android开源项目,所有开源项目都有详细资料和配套视频",
@@ -21,10 +21,10 @@ object RepoList {
                 "java"
             )
         ),
-        Repo(
+        RepoDto(
             id = 12544093, nodeId = "MDEwOlJlcG9zaXRvcnkxMjU0NDA5Mw==",
             name = "Android", fullName = "hmkcode/Android",
-            owner = Owner(
+            owner = OwnerDto(
                 username = "hmkcode"
             ),
             description = "Android related examples",
@@ -34,6 +34,5 @@ object RepoList {
             topics = listOf()
         )
     )
-
 
 }

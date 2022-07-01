@@ -21,7 +21,7 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getTopRepos().observe(viewLifecycleOwner) { resource ->
+        viewModel.getRepos().observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Failure -> {
                     binding.root.showSnackBar(resource.message)

@@ -14,7 +14,7 @@ class RepoListViewModel @Inject constructor(
 
 
 
-    fun getTopRepos() = repository.getRepos(
+    fun getRepos() = repository.getRepos(
         mapOf(
             "q" to QUERY,
             "per_page" to LIMIT.toString()
