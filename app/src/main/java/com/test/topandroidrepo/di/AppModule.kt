@@ -7,6 +7,7 @@ import com.google.gson.GsonBuilder
 import com.test.topandroidrepo.domain.db.TOP_REPO_DATABASE
 import com.test.topandroidrepo.domain.db.TopRepoDatabase
 import com.test.topandroidrepo.domain.db.dao.RepoDao
+import com.test.topandroidrepo.domain.db.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,5 +37,11 @@ object AppModule {
     fun provideRepoDao(
         db: TopRepoDatabase
     ): RepoDao = db.repoDao()
+
+    @Singleton
+    @Provides
+    fun provideUserDao(
+        db: TopRepoDatabase
+    ): UserDao = db.userDao()
 
 }

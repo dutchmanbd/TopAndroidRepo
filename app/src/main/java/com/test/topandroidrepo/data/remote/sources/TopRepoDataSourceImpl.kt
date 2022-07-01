@@ -9,4 +9,8 @@ class TopRepoDataSourceImpl(
     override suspend fun getRepositories(queryMap: Map<String, String>) = apiRequest {
         apiService.getRepositories(queryMap)
     }
+
+    override suspend fun getUser(username: String) = apiRequest {
+        apiService.getUser(username)
+    }
 }

@@ -51,7 +51,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         })
     }
 
-    protected open fun onFetchFailed(){}
+    protected abstract fun onFetchFailed()
 
     @WorkerThread
     protected open fun processResponse(response: ApiSuccessResponse<RequestType>) = response.body

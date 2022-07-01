@@ -10,6 +10,7 @@ import com.test.topandroidrepo.data.remote.sources.TopRepoDataSource
 import com.test.topandroidrepo.data.remote.sources.TopRepoDataSourceImpl
 import com.test.topandroidrepo.data.repository.TopRepositoryImpl
 import com.test.topandroidrepo.domain.db.dao.RepoDao
+import com.test.topandroidrepo.domain.db.dao.UserDao
 import com.test.topandroidrepo.domain.repository.TopRepository
 import com.test.utilities.middleware.AuthInterceptor
 import com.test.utilities.middleware.ConnectivityInterceptor
@@ -71,7 +72,8 @@ object NetworkModule {
     @Singleton
     fun provideTopRepository(
         dataSource: TopRepoDataSource,
-        repoDao: RepoDao
-    ): TopRepository = TopRepositoryImpl(dataSource, repoDao)
+        repoDao: RepoDao,
+        userDao: UserDao
+    ): TopRepository = TopRepositoryImpl(dataSource, repoDao, userDao)
 
 }

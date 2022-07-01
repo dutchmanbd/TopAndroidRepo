@@ -36,6 +36,8 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
         }
     }
 
+
+
     companion object {
         private const val TAG = "RepoListFragment"
     }
