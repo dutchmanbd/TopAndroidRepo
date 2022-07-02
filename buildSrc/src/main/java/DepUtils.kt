@@ -10,6 +10,7 @@ object DepUtils {
     const val hamcrest = "org.hamcrest:hamcrest-all:_"
     const val robolectric = "org.robolectric:robolectric:_"
     const val mockito = "org.mockito:mockito-core:_"
+    const val mockitoInline = "org.mockito:mockito-inline:_"
     const val dexMakerMockito = "com.linkedin.dexmaker:dexmaker-mockito:_"
     const val truth = "com.google.truth:truth:_"
 

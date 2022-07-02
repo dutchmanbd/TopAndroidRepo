@@ -1,11 +1,13 @@
 package com.test.topandroidrepo.domain.repository
 
+import com.test.topandroidrepo.OpenForTesting
 import com.test.topandroidrepo.data.mapper.toRepo
 import com.test.topandroidrepo.data.model.RepoDto
 import com.test.topandroidrepo.domain.model.Repo
 import com.test.utilities.middleware.NetworkBoundResource
 import com.test.utilities.responses.*
 
+@OpenForTesting
 class FakeRepoNetworkBoundResource(
     private val shouldNetworkError: Boolean
 ) : NetworkBoundResource<List<Repo>, List<RepoDto>>() {

@@ -16,6 +16,7 @@ import com.test.utilities.Resource
 import com.test.utilities.middleware.NetworkBoundResource
 import java.util.concurrent.TimeUnit
 
+
 class TopRepositoryImpl(
     private val dataSource: TopRepoDataSource,
     private val repoDao: RepoDao,
@@ -24,7 +25,7 @@ class TopRepositoryImpl(
 
     private val rateLimit = RateLimiter<String>(5, TimeUnit.MINUTES)
 
-    override fun getRepos(
+    override fun searchRepos(
         queryMap: Map<String, String>
     ): LiveData<Resource<List<Repo>>> =
         object : NetworkBoundResource<List<Repo>, SearchRepositoryResponse>() {
@@ -40,7 +41,7 @@ class TopRepositoryImpl(
             }
 
             override suspend fun loadFromDb() = repoDao.getRepos()
-            override suspend fun createCall() = dataSource.getRepositories(queryMap)
+            override suspend fun createCall() = dataSource.searchRepos(queryMap)
 
             override fun onFetchFailed() {
                 rateLimit.reset(queryMap.values.joinToString(","))

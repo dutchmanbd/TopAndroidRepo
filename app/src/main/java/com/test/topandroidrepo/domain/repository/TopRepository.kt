@@ -7,7 +7,7 @@ import com.test.utilities.Resource
 
 interface TopRepository {
 
-    fun getRepos(queryMap: Map<String, String>): LiveData<Resource<List<Repo>>>
+    fun searchRepos(queryMap: Map<String, String>): LiveData<Resource<List<Repo>>>
 
     fun getUser(username: String): LiveData<Resource<User>>
 }

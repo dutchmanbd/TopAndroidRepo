@@ -10,7 +10,7 @@ import retrofit2.http.QueryMap
 interface TopRepoApiService {
 
     @GET("search/repositories")
-    suspend fun getRepositories(
+    suspend fun searchRepos(
         @QueryMap queryMap: Map<String, String>
     ): Response<SearchRepositoryResponse>
 

@@ -7,7 +7,7 @@ import com.test.utilities.responses.ApiResponse
 
 interface TopRepoDataSource {
 
-    suspend fun getRepositories(
+    suspend fun searchRepos(
         queryMap: Map<String, String>
     ): ApiResponse<SearchRepositoryResponse>
 

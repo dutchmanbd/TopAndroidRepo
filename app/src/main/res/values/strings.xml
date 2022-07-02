@@ -6,4 +6,5 @@
     <string name="updated_at_format">Updated At: %1$s</string>
     <string name="last_updated_at_format">Last Update: %1$s</string>
     <string name="detail">Detail</string>
+    <string name="android">Android</string>
 </resources>

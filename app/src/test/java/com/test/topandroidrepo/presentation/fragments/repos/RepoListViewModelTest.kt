@@ -1,9 +1,11 @@
 package com.test.topandroidrepo.presentation.fragments.repos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.google.common.truth.Truth.assertThat
+import androidx.lifecycle.Observer
 import com.test.topandroidrepo.MainCoroutineRule
+import com.test.topandroidrepo.domain.model.Repo
 import com.test.topandroidrepo.domain.repository.FakeTopRepository
+import com.test.topandroidrepo.mock
 import com.test.utilities.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -12,14 +14,15 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 
 
 @ExperimentalCoroutinesApi
 class RepoListViewModelTest {
 
-    private val testDispatcher = StandardTestDispatcher(
-        TestCoroutineScheduler()
-    )
+    private val testDispatcher = TestCoroutineDispatcher()
+
     @Rule
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
@@ -28,35 +31,31 @@ class RepoListViewModelTest {
     @get:Rule
     var mainCoroutineRule = MainCoroutineRule()
 
-    private lateinit var repository: FakeTopRepository
+    private val repository = mock(FakeTopRepository::class.java)
     private lateinit var viewModel: RepoListViewModel
 
     @Before
     fun setup() {
         Dispatchers.setMain(testDispatcher)
-        repository = FakeTopRepository()
         viewModel = RepoListViewModel(repository)
     }
 
     @After
-    fun teardown(){
+    fun teardown() {
         Dispatchers.resetMain()
     }
 
 
     @Test
-    fun `get repos, return repo list`() = runTest {
-        viewModel.getRepos().observeForever {
-            assertThat(it).isInstanceOf(Resource.Success::class.java)
-        }
-    }
-
-    @Test
-    fun `get repos, return network error`()  = runTest {
-        repository.shouldNetworkError = true
-        viewModel.getRepos().observeForever {
-            assertThat(it).isInstanceOf(Resource.Failure::class.java)
-        }
+    fun `get repos, return repo list`() {
+        val result = mock<Observer<Resource<List<Repo>>>>()
+        viewModel.repos.observeForever(result)
+        viewModel.updateQuery("Android")
+        verify(repository).searchRepos(
+            mapOf(
+                "q" to "Android", "sort" to "stars", "per_page" to "50"
+            )
+        )
     }
 
 }

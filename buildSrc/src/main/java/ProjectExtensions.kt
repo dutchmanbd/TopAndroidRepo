@@ -15,6 +15,7 @@ fun Project.setupCommonDependencies() {
         testImplementation(DepUtils.junit)
         testImplementation(DepUtils.robolectric)
         testImplementation(DepUtils.mockito)
+        testImplementation(DepUtils.mockitoInline)
         testImplementation(DepUtils.truth)
 
 
@@ -30,6 +31,7 @@ fun Project.setupCommonDependencies() {
         androidTestImplementation(DepUtils.junit)
         androidTestImplementation(DepUtils.robolectric)
         androidTestImplementation(DepUtils.mockito)
+        androidTestImplementation(DepUtils.mockitoInline)
         androidTestImplementation(DepUtils.dexMakerMockito)
         androidTestImplementation(DepUtils.truth)
 

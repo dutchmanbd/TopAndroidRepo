@@ -1,7 +1,9 @@
 package com.test.topandroidrepo.presentation.fragments.repos
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.test.extensions.view.showSnackBar
@@ -29,6 +31,16 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         subscribeObservers()
+        setupListeners()
+    }
+
+    private fun setupListeners() {
+        binding.etSearch.addTextChangedListener { text ->
+            text?.toString()?.let {
+                viewModel.updateQuery(it)
+            }
+        }
+        binding.etSearch.setText(R.string.android)
     }
 
     private fun setupRecyclerView() {
@@ -47,7 +59,7 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
     }
 
     private fun subscribeObservers() {
-        viewModel.getRepos().observe(viewLifecycleOwner) { resource ->
+        viewModel.repos.observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Failure -> {
                     binding.piRepos.hide()
@@ -58,6 +70,7 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
                 }
                 is Resource.Success -> {
                     binding.piRepos.hide()
+                    Log.e(TAG, "subscribeObservers: ${resource.data}")
                     repoAdapter.differ.submitList(resource.data)
                 }
             }
