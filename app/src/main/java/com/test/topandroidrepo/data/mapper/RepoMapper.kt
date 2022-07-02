@@ -9,5 +9,7 @@ fun RepoDto.toRepo() = Repo(
     owner = owner?.toOwner(),
     description = description ?: "",
     createdAt = createdAt, updatedAt = updatedAt,
-    pushedAt = pushedAt, topics = topics
+    pushedAt = pushedAt,
+    stargazersCount = stargazersCount,
+    topics = topics
 )

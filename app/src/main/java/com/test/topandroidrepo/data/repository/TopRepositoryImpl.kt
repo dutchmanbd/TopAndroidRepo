@@ -47,22 +47,22 @@ class TopRepositoryImpl(
             }
         }.asLiveData()
 
-//    override fun getUser(
-//        username: String
-//    ): LiveData<Resource<User>> = object : NetworkBoundResource<User, UserDto>() {
-//        override suspend fun saveCallResult(item: UserDto) {
-//            val user = item.toUser()
-//            userDao.insertUser(user)
-//        }
-//
-//        override fun shouldFetch(data: User?): Boolean {
-//            return data == null || rateLimit.shouldFetch(username)
-//        }
-//
-//        override suspend fun loadFromDb() = userDao.getUser(username)
-//        override suspend fun createCall() = dataSource.getUser(username)
-//        override fun onFetchFailed() {
-//            rateLimit.reset(username)
-//        }
-//    }.asLiveData()
+    override fun getUser(
+        username: String
+    ): LiveData<Resource<User>> = object : NetworkBoundResource<User, UserDto>() {
+        override suspend fun saveCallResult(item: UserDto) {
+            val user = item.toUser()
+            userDao.insertUser(user)
+        }
+
+        override fun shouldFetch(data: User?): Boolean {
+            return data == null || rateLimit.shouldFetch(username)
+        }
+
+        override suspend fun loadFromDb() = userDao.getUser(username)
+        override suspend fun createCall() = dataSource.getUser(username)
+        override fun onFetchFailed() {
+            rateLimit.reset(username)
+        }
+    }.asLiveData()
 }

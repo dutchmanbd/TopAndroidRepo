@@ -19,7 +19,8 @@ object RepoList {
             topics = listOf(
                 "android",
                 "java"
-            )
+            ),
+            stargazersCount = 10
         ),
         RepoDto(
             id = 12544093, nodeId = "MDEwOlJlcG9zaXRvcnkxMjU0NDA5Mw==",
@@ -31,7 +32,8 @@ object RepoList {
             createdAt = "2013-09-02T16:12:28Z",
             updatedAt = "2022-07-01T05:15:47Z",
             pushedAt = "2022-05-26T07:20:22Z",
-            topics = listOf()
+            topics = listOf(),
+            stargazersCount = 10
         )
     )
 

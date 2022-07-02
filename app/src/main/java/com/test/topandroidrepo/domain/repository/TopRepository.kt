@@ -9,5 +9,5 @@ interface TopRepository {
 
     fun getRepos(queryMap: Map<String, String>): LiveData<Resource<List<Repo>>>
 
-//    fun getUser(username: String): LiveData<Resource<User>>
+    fun getUser(username: String): LiveData<Resource<User>>
 }

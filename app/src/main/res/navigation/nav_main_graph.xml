@@ -7,6 +7,18 @@
     <fragment
         android:id="@+id/repoListFragment"
         android:name="com.test.topandroidrepo.presentation.fragments.repos.RepoListFragment"
-        android:label="@string/repos" />
+        android:label="@string/repos" >
+        <action
+            android:id="@+id/action_repoListFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.test.topandroidrepo.presentation.fragments.detail.DetailFragment"
+        android:label="@string/detail" >
+        <argument
+            android:name="repo"
+            app:argType="com.test.topandroidrepo.domain.model.Repo" />
+    </fragment>
 
 </navigation>

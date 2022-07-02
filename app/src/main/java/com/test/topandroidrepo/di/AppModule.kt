@@ -23,6 +23,7 @@ object AppModule {
     @Singleton
     fun provideGson(): Gson = GsonBuilder().setLenient().create()
 
+
     @Singleton
     @Provides
     fun provideTopRepoDatabase(

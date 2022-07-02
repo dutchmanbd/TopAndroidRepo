@@ -21,6 +21,8 @@ data class RepoDto(
     val updatedAt: String,
     @SerializedName("pushed_at")
     val pushedAt: String,
+    @SerializedName("stargazers_count")
+    val stargazersCount: Int,
     @SerializedName("topics")
     val topics: List<String>
 )
