@@ -13,7 +13,7 @@ data class UserDto(
     @SerializedName("login")
     val username: String,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("node_id")
     val nodeId: String,
     @SerializedName("type")
@@ -21,5 +21,5 @@ data class UserDto(
     @SerializedName("updated_at")
     val updatedAt: String,
     @SerializedName("url")
-    val url: String
+    val url: String?
 )

@@ -8,9 +8,9 @@ fun UserDto.toUser() = User(
     createdAt = createdAt,
     id = id,
     username = username,
-    name = name,
+    name = name ?: "",
     nodeId = nodeId,
     type = type,
     updatedAt = updatedAt,
-    url = url
+    url = url ?: ""
 )
