@@ -4,9 +4,10 @@ import androidx.lifecycle.LiveData
 import com.test.topandroidrepo.domain.model.Repo
 import com.test.utilities.Resource
 
+
 interface TopRepository {
 
-    fun searchRepos(queryMap: Map<String, String>): LiveData<Resource<List<Repo>>>
+    fun searchRepos(query: String, sortBy: String, limit: Int): LiveData<Resource<List<Repo>>>
 
 
 }

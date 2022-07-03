@@ -2,8 +2,6 @@ package com.test.topandroidrepo.presentation.activities.main
 
 
 import android.os.Bundle
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.test.extensions.activity.findNavController

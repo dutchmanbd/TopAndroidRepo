@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.StringRes
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 
 fun View.showSnackBar(@StringRes resId: Int) {
@@ -35,4 +36,10 @@ fun View.showKeyboard() {
     val imm: InputMethodManager? =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
     imm?.showSoftInput(this, 0)
+}
+
+fun RecyclerView.scrollTop() {
+    post {
+        smoothScrollToPosition(0)
+    }
 }

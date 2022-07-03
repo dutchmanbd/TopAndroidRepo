@@ -3,11 +3,11 @@ package com.test.topandroidrepo.presentation.fragments.repos
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import com.test.extensions.time.formattedDateTime
 import com.test.topandroidrepo.R
 import com.test.topandroidrepo.databinding.SimpleRepoItemBinding
 import com.test.topandroidrepo.domain.model.Repo
 import com.test.topandroidrepo.presentation.activities.base.BaseAdapter
-import com.test.utilities.DateTimeUtils
 import javax.inject.Inject
 
 
@@ -28,11 +28,11 @@ class RepoAdapter @Inject constructor() : BaseAdapter<Repo, SimpleRepoItemBindin
         val repo = differ.currentList[position]
         holder.binding.apply {
             tvRepoName.text = repo.fullName
-            val createdAt = DateTimeUtils.getLocalDate(repo.createdAt)
-            val updatedAt = DateTimeUtils.getLocalDate(repo.updatedAt)
+            val createdAt = repo.createdAt.formattedDateTime()
+            val updatedAt = repo.updated.formattedDateTime()
             tvCreatedAt.text = root.context.getString(R.string.created_at_format, createdAt)
             tvUpdatedAt.text = root.context.getString(R.string.updated_at_format, updatedAt)
-            tvStar.text = repo.stargazersCount.toString()
+            tvStar.text = repo.stars.toString()
 
             root.setOnClickListener { view ->
                 listener?.let { click ->

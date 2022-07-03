@@ -1,6 +1,5 @@
 package com.test.topandroidrepo.domain.db.dao
 
-import com.test.topandroidrepo.domain.model.Owner
 import com.test.topandroidrepo.domain.model.Repo
 
 object RepoList {

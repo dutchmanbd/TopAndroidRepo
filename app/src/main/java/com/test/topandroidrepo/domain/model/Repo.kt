@@ -1,23 +1,35 @@
 package com.test.topandroidrepo.domain.model
 
-import android.os.Parcelable
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "repos")
+import android.os.Parcelable
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Index
+import kotlinx.parcelize.Parcelize
+import java.util.*
+
+
+@Entity(
+    tableName = "repos",
+    indices = [
+        Index("id"),
+        Index("owner_username")],
+    primaryKeys = ["name", "owner_username"]
+)
 @Parcelize
 data class Repo(
     val id: Int,
-    @PrimaryKey(autoGenerate = false)
     val nodeId: String,
     val name: String,
     val fullName: String,
-    val owner: Owner?,
+    @field:Embedded(prefix = "owner_")
+    val owner: Owner,
     val description: String,
-    val createdAt: String,
-    val updatedAt: String,
-    val pushedAt: String,
-    val stargazersCount: Int,
+    val createdAt: Date,
+    val updated: Date,
+    val pushedAt: Date,
+    val stars: Int,
     val topics: List<String>
-) : Parcelable
+) : Parcelable {
+
+}

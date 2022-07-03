@@ -7,4 +7,7 @@
     <string name="last_updated_at_format">Last Update: %1$s</string>
     <string name="detail">Detail</string>
     <string name="android">Android</string>
+    <string name="filter">Filter</string>
+    <string name="stars">Star</string>
+    <string name="updated">Update Date</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.test.topandroidrepo.data.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import com.test.topandroidrepo.data.mapper.toRepo
 import com.test.topandroidrepo.data.remote.responses.SearchRepositoryResponse
@@ -18,28 +19,37 @@ class TopRepositoryImpl(
     private val repoDao: RepoDao
 ) : TopRepository {
 
-    private val rateLimit = RateLimiter<String>(15, TimeUnit.MINUTES)
+    private val rateLimit = RateLimiter<String>(5, TimeUnit.MINUTES)
 
     override fun searchRepos(
-        queryMap: Map<String, String>
+        query: String, sortBy: String, limit: Int
     ): LiveData<Resource<List<Repo>>> =
         object : NetworkBoundResource<List<Repo>, SearchRepositoryResponse>() {
             override suspend fun saveCallResult(item: SearchRepositoryResponse) {
-                val repos = item.repos?.map { it.toRepo() } ?: emptyList()
+                val repos = item.repos?.mapIndexed { _, repoDto -> repoDto.toRepo() }
+                    ?: emptyList()
                 if (repos.isNotEmpty()) {
                     repoDao.insertRepos(repos)
                 }
             }
 
             override fun shouldFetch(data: List<Repo>?): Boolean {
-                return data == null || rateLimit.shouldFetch(queryMap.values.joinToString(","))
+                if (data == null || data.isEmpty())
+                    return true
+                return rateLimit.shouldFetch(
+                    "$query$sortBy$limit"
+                )
             }
 
-            override suspend fun loadFromDb() = repoDao.getRepos()
-            override suspend fun createCall() = dataSource.searchRepos(queryMap)
+            override suspend fun loadFromDb(): List<Repo>? {
+                Log.e("Repository", "loadFromDb: $sortBy")
+                return if (sortBy == "stars") repoDao.searchReposByStars() else repoDao.searchReposByUpdated()
+            }
+
+            override suspend fun createCall() = dataSource.searchRepos(query, sortBy, limit)
 
             override fun onFetchFailed() {
-                rateLimit.reset(queryMap.values.joinToString(","))
+                rateLimit.reset("$query$sortBy$limit")
             }
         }.asLiveData()
 

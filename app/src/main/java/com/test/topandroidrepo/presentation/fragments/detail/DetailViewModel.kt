@@ -10,5 +10,5 @@ class DetailViewModel @Inject constructor(
     private val repository: UserRepository
 ) : BaseViewModel() {
 
-    fun getUser(username: String?) = repository.getUser(username ?: "")
+    fun getUser(username: String) = repository.getUser(username)
 }

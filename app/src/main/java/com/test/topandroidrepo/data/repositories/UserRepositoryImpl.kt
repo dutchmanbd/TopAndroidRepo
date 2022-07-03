@@ -17,7 +17,7 @@ class UserRepositoryImpl(
     private val userDao: UserDao
 ) : UserRepository {
 
-    private val rateLimit = RateLimiter<String>(15, TimeUnit.MINUTES)
+    private val rateLimit = RateLimiter<String>(5, TimeUnit.MINUTES)
 
 
     override fun getUser(

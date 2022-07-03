@@ -41,7 +41,7 @@ class RepoDaoTest {
     fun insertRepos() = runTest {
         val repos = RepoList.repos
         repoDao.insertRepos(repos)
-        val dbRepos = repoDao.getRepos()
+        val dbRepos = repoDao.searchReposByStars()
 
         assertThat(dbRepos).containsExactlyElementsIn(repos)
             .inOrder()

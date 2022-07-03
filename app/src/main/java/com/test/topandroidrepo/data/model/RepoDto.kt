@@ -12,7 +12,7 @@ data class RepoDto(
     @SerializedName("full_name")
     val fullName: String,
     @SerializedName("owner")
-    val owner: OwnerDto?,
+    val owner: OwnerDto,
     @SerializedName("description")
     val description: String?,
     @SerializedName("created_at")

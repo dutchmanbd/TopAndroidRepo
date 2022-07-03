@@ -18,7 +18,7 @@ class RepoListViewModel @Inject constructor(
     private val repository: TopRepository
 ) : BaseViewModel() {
 
-    private val _searchState = MutableLiveData<SearchRepoState>(
+    private val _searchState = MutableLiveData(
         SearchRepoState()
     )
 
@@ -39,21 +39,13 @@ class RepoListViewModel @Inject constructor(
             AbsentLiveData.create()
         } else {
             repository.searchRepos(
-                mapOf(
-                    "q" to state.search,
-                    "sort" to state.filter.ifEmpty { FilterItem.Stars.filter },
-                    "per_page" to LIMIT.toString()
-                )
+                state.search,
+                state.filter.ifEmpty { FilterItem.Stars.filter },
+                LIMIT
             )
         }
     }
 
-//    fun getRepos() = repository.getRepos(
-//        mapOf(
-//            "q" to QUERY,
-//            "per_page" to LIMIT.toString()
-//        )
-//    )
 
     companion object {
         private const val LIMIT = 50

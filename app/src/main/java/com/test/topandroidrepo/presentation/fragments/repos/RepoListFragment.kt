@@ -1,16 +1,21 @@
 package com.test.topandroidrepo.presentation.fragments.repos
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
+import android.view.*
+import androidx.appcompat.widget.PopupMenu
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import com.test.extensions.view.scrollTop
 import com.test.extensions.view.showSnackBar
 import com.test.topandroidrepo.R
 import com.test.topandroidrepo.databinding.FragmentRepoListBinding
 import com.test.topandroidrepo.domain.model.Repo
 import com.test.topandroidrepo.presentation.fragments.base.BaseFragment
+import com.test.utilities.FilterItem
 import com.test.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -27,11 +32,45 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
 
     override fun initializeViewBinding(view: View) = FragmentRepoListBinding.bind(view)
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRecyclerView()
         subscribeObservers()
         setupListeners()
+        setupMenuHostProvider()
+    }
+
+    private fun setupMenuHostProvider() {
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_filter, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                if (menuItem.itemId == R.id.actionFilter) {
+                    val menuItemView = requireActivity().findViewById<View>(R.id.actionFilter)
+                    showFilterItems(menuItemView)
+                }
+                return true
+            }
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+    private fun showFilterItems(menuItemView: View) {
+        val popupMenu = PopupMenu(requireContext(), menuItemView)
+        popupMenu.menuInflater.inflate(R.menu.menu_filter_item, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item ->
+            if (item.itemId == R.id.actionFilterByStars) {
+                viewModel.updateFilter(FilterItem.Stars)
+            } else if (item.itemId == R.id.actionFilterByUpdated) {
+                viewModel.updateFilter(FilterItem.Updated)
+            }
+            true
+        }
+        popupMenu.show()
     }
 
     private fun setupListeners() {
@@ -70,13 +109,14 @@ class RepoListFragment : BaseFragment<RepoListViewModel, FragmentRepoListBinding
                 }
                 is Resource.Success -> {
                     binding.piRepos.hide()
-                    Log.e(TAG, "subscribeObservers: ${resource.data}")
                     repoAdapter.differ.submitList(resource.data)
+                    if (resource.data.isNotEmpty()) {
+                        binding.rvRepos.scrollTop()
+                    }
                 }
             }
         }
     }
-
 
     companion object {
         private const val TAG = "RepoListFragment"

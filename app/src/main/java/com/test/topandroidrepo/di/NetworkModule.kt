@@ -14,6 +14,7 @@ import com.test.topandroidrepo.domain.db.dao.RepoDao
 import com.test.topandroidrepo.domain.db.dao.UserDao
 import com.test.topandroidrepo.domain.repositories.TopRepository
 import com.test.topandroidrepo.domain.repositories.UserRepository
+import com.test.utilities.RateLimiter
 import com.test.utilities.middleware.AuthInterceptor
 import com.test.utilities.middleware.ConnectivityInterceptor
 import dagger.Module
@@ -69,6 +70,7 @@ object NetworkModule {
     fun provideTopRepoDataSource(
         apiService: TopRepoApiService
     ): TopRepoDataSource = TopRepoDataSourceImpl(apiService)
+
 
     @Provides
     @Singleton

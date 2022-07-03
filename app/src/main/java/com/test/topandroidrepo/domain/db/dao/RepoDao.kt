@@ -15,8 +15,12 @@ interface RepoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRepos(repos: List<Repo>)
 
-    @Query("SELECT * FROM repos")
-    suspend fun getRepos(): List<Repo>?
+
+    @Query("SELECT * FROM repos order by stars DESC LIMIT 50")
+    suspend fun searchReposByStars(): List<Repo>?
+
+    @Query("SELECT * FROM repos order by updated DESC LIMIT 50")
+    suspend fun searchReposByUpdated(): List<Repo>?
 
 
 }

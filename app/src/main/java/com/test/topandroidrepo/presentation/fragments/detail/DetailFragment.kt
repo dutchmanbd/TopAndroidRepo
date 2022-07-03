@@ -5,12 +5,12 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.test.extensions.time.formattedDateTime
 import com.test.extensions.view.showSnackBar
 import com.test.topandroidrepo.R
 import com.test.topandroidrepo.databinding.FragmentDetailBinding
 import com.test.topandroidrepo.domain.model.User
 import com.test.topandroidrepo.presentation.fragments.base.BaseFragment
-import com.test.utilities.DateTimeUtils
 import com.test.utilities.Resource
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +34,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
     }
 
     private fun subscribeObservers() {
-        viewModel.getUser(repo.owner?.username).observe(viewLifecycleOwner) { resource ->
+        viewModel.getUser(repo.owner.username).observe(viewLifecycleOwner) { resource ->
             when (resource) {
                 is Resource.Failure -> {
                     binding.piDetail.hide()
@@ -55,7 +55,7 @@ class DetailFragment : BaseFragment<DetailViewModel, FragmentDetailBinding>(
         binding.tvName.text = user.name
         binding.tvRepoDescription.text = repo.description
         binding.tvLastUpdate.text =
-            getString(R.string.last_updated_at_format, DateTimeUtils.getLocalDate(repo.updatedAt))
+            getString(R.string.last_updated_at_format, repo.updated.formattedDateTime())
         binding.ivAvatar.load(user.avatarUrl)
     }
 

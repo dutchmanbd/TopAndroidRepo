@@ -8,7 +8,7 @@ import com.test.utilities.responses.ApiResponse
 interface TopRepoDataSource {
 
     suspend fun searchRepos(
-        queryMap: Map<String, String>
+        query: String, sortBy: String, limit: Int
     ): ApiResponse<SearchRepositoryResponse>
 
     suspend fun getUser(

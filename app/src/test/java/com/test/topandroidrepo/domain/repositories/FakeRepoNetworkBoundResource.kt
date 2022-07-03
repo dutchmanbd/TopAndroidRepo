@@ -19,7 +19,7 @@ class FakeRepoNetworkBoundResource(
     }
 
     override suspend fun saveCallResult(item: List<RepoDto>) {
-        val repos = item.map { it.toRepo() }
+        val repos = item.mapIndexed { _, repoDto -> repoDto.toRepo() }
         if (repos.isNotEmpty()) {
             localRepos.clear()
             localRepos.addAll(repos)
@@ -27,7 +27,7 @@ class FakeRepoNetworkBoundResource(
     }
 
     override fun shouldFetch(data: List<Repo>?): Boolean {
-        return data == null
+        return data == null || data.isEmpty()
     }
 
     override suspend fun loadFromDb(): List<Repo>? = localRepos
