@@ -1,4 +1,4 @@
-package com.test.topandroidrepo.domain.repository
+package com.test.topandroidrepo.domain.repositories
 
 import com.test.topandroidrepo.OpenForTesting
 import com.test.topandroidrepo.data.mapper.toRepo

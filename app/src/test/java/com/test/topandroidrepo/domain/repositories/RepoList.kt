@@ -1,4 +1,4 @@
-package com.test.topandroidrepo.domain.repository
+package com.test.topandroidrepo.domain.repositories
 
 import com.test.topandroidrepo.data.model.OwnerDto
 import com.test.topandroidrepo.data.model.RepoDto

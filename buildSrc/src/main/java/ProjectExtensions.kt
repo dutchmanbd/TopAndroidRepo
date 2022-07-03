@@ -17,6 +17,7 @@ fun Project.setupCommonDependencies() {
         testImplementation(DepUtils.mockito)
         testImplementation(DepUtils.mockitoInline)
         testImplementation(DepUtils.truth)
+        testImplementation(Square.okHttp3.mockWebServer)
 
 
         // Instrumented Unit Test

@@ -8,10 +8,12 @@ import com.test.topandroidrepo.data.remote.middleware.AuthInterceptorImpl
 import com.test.topandroidrepo.data.remote.middleware.ConnectivityInterceptorImpl
 import com.test.topandroidrepo.data.remote.sources.TopRepoDataSource
 import com.test.topandroidrepo.data.remote.sources.TopRepoDataSourceImpl
-import com.test.topandroidrepo.data.repository.TopRepositoryImpl
+import com.test.topandroidrepo.data.repositories.TopRepositoryImpl
+import com.test.topandroidrepo.data.repositories.UserRepositoryImpl
 import com.test.topandroidrepo.domain.db.dao.RepoDao
 import com.test.topandroidrepo.domain.db.dao.UserDao
-import com.test.topandroidrepo.domain.repository.TopRepository
+import com.test.topandroidrepo.domain.repositories.TopRepository
+import com.test.topandroidrepo.domain.repositories.UserRepository
 import com.test.utilities.middleware.AuthInterceptor
 import com.test.utilities.middleware.ConnectivityInterceptor
 import dagger.Module
@@ -72,8 +74,14 @@ object NetworkModule {
     @Singleton
     fun provideTopRepository(
         dataSource: TopRepoDataSource,
-        repoDao: RepoDao,
+        repoDao: RepoDao
+    ): TopRepository = TopRepositoryImpl(dataSource, repoDao)
+
+    @Provides
+    @Singleton
+    fun provideUserRepository(
+        dataSource: TopRepoDataSource,
         userDao: UserDao
-    ): TopRepository = TopRepositoryImpl(dataSource, repoDao, userDao)
+    ): UserRepository = UserRepositoryImpl(dataSource, userDao)
 
 }

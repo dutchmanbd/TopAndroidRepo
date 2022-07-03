@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import com.test.topandroidrepo.domain.model.Repo
-import com.test.topandroidrepo.domain.repository.TopRepository
+import com.test.topandroidrepo.domain.repositories.TopRepository
 import com.test.topandroidrepo.presentation.activities.base.BaseViewModel
 import com.test.utilities.AbsentLiveData
 import com.test.utilities.FilterItem

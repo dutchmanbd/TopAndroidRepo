@@ -4,7 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.test.topandroidrepo.MainCoroutineRule
 import com.test.topandroidrepo.domain.model.Repo
-import com.test.topandroidrepo.domain.repository.FakeTopRepository
+import com.test.topandroidrepo.domain.repositories.FakeTopRepository
 import com.test.topandroidrepo.mock
 import com.test.utilities.Resource
 import kotlinx.coroutines.Dispatchers
