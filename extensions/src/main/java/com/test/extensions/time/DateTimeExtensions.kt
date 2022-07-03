@@ -6,7 +6,7 @@ import java.util.*
 private const val UTC_TIME_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'"
 private const val DATE_TIME_FORMAT = "MM-dd-yy HH:ss"
 
-fun String.timeInMillis(): Date {
+fun String.date(): Date {
     val utcFormat = SimpleDateFormat(UTC_TIME_FORMAT, Locale.US)
     utcFormat.timeZone = TimeZone.getTimeZone("UTC")
     return try {

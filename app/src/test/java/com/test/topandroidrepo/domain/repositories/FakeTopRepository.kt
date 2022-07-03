@@ -11,7 +11,9 @@ class FakeTopRepository : TopRepository {
     var shouldNetworkError = false
 
     override fun searchRepos(
-        queryMap: Map<String, String>
+        query: String,
+        sortBy: String,
+        limit: Int
     ): LiveData<Resource<List<Repo>>> =
         FakeRepoNetworkBoundResource(shouldNetworkError).asLiveData()
 

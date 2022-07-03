@@ -6,6 +6,8 @@ fun Project.setupCommonDependencies() {
         val implementation by configurations
         val testImplementation by configurations
         val androidTestImplementation by configurations
+        val debugImplementation by configurations
+        val kaptAndroidTest by configurations
 
         // Local Unit Test
         implementation(AndroidX.test.coreKtx)
@@ -33,8 +35,13 @@ fun Project.setupCommonDependencies() {
         androidTestImplementation(DepUtils.robolectric)
         androidTestImplementation(DepUtils.mockito)
         androidTestImplementation(DepUtils.mockitoInline)
-        androidTestImplementation(DepUtils.dexMakerMockito)
         androidTestImplementation(DepUtils.truth)
+
+        androidTestImplementation(Google.dagger.hilt.android.testing)
+        kaptAndroidTest(Google.dagger.hilt.compiler)
+
+
+        debugImplementation(AndroidX.fragment.testing)
 
         implementation(
             fileTree(

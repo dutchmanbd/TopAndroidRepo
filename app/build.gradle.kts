@@ -15,7 +15,7 @@ android {
         applicationId = "com.test.topandroidrepo"
         versionCode = 1
         versionName = "1.0.0_alpha01"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.test.topandroidrepo.HiltTestRunner"
 
         ndk {
             abiFilters.addAll(arrayOf("armeabi-v7a", "arm64-v8a", "x86", "x86_64"))
@@ -76,8 +76,8 @@ android {
     }
 }
 
-
 setupCommonDependencies()
+
 
 dependencies {
 

@@ -1,33 +1,44 @@
 package com.test.topandroidrepo.domain.db.dao
 
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
+
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth.assertThat
+import com.test.topandroidrepo.RepoList
 import com.test.topandroidrepo.domain.db.TopRepoDatabase
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import javax.inject.Inject
+import javax.inject.Named
 
 @ExperimentalCoroutinesApi
 @RunWith(AndroidJUnit4::class)
 @SmallTest
+@HiltAndroidTest
 class RepoDaoTest {
 
-    private lateinit var db: TopRepoDatabase
+    @get:Rule
+    var hiltRule = HiltAndroidRule(this)
+
+    /**
+     * I have no enough time to complete all test using hilt
+     */
+
+    @Inject
+    @Named("test_db")
+    lateinit var db: TopRepoDatabase
     private lateinit var repoDao: RepoDao
 
     @Before
     fun setup() {
-        db = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            TopRepoDatabase::class.java
-        ).allowMainThreadQueries()
-            .build()
+        hiltRule.inject()
         repoDao = db.repoDao()
     }
 

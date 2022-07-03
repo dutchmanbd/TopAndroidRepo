@@ -52,9 +52,7 @@ class RepoListViewModelTest {
         viewModel.repos.observeForever(result)
         viewModel.updateQuery("Android")
         verify(repository).searchRepos(
-            mapOf(
-                "q" to "Android", "sort" to "stars", "per_page" to "50"
-            )
+            "Android", "stars", 50
         )
     }
 
